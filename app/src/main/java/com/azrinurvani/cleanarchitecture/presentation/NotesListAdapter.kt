@@ -10,7 +10,7 @@ import com.azrinurvani.core.data.Note
 import java.text.SimpleDateFormat
 import java.util.Date
 
-class NotesListAdapter(var notes : ArrayList<Note>) : RecyclerView.Adapter<NotesListAdapter.NoteViewHolder>() {
+class NotesListAdapter(var notes : ArrayList<Note>,val actions: ListAction) : RecyclerView.Adapter<NotesListAdapter.NoteViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         return NoteViewHolder(
@@ -33,7 +33,7 @@ class NotesListAdapter(var notes : ArrayList<Note>) : RecyclerView.Adapter<Notes
     }
 
 
-    inner class NoteViewHolder(val binding : ItemNoteBinding) : ViewHolder(binding.root){
+    inner class NoteViewHolder(private val binding : ItemNoteBinding) : ViewHolder(binding.root){
 
         @SuppressLint("SimpleDateFormat", "SetTextI18n")
         fun bind(note:Note){
@@ -45,6 +45,9 @@ class NotesListAdapter(var notes : ArrayList<Note>) : RecyclerView.Adapter<Notes
                 val resultDate = Date(note.updateTime)
 
                 tvDate.text = "Last updated : ${sdf.format(resultDate)}"
+                this.noteLayout.setOnClickListener {
+                    actions.onClick(id = note.id)
+                }
             }
         }
     }

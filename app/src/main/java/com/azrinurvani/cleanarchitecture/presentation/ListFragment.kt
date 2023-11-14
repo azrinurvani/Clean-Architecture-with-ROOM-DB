@@ -14,12 +14,12 @@ import com.azrinurvani.cleanarchitecture.databinding.FragmentListBinding
 import com.azrinurvani.cleanarchitecture.framework.ListViewModel
 
 
-class ListFragment : Fragment() {
+class ListFragment : Fragment(), ListAction {
 
     private var _binding : FragmentListBinding? = null
     private val binding get() = _binding
 
-    private val noteListAdapter = NotesListAdapter(arrayListOf())
+    private val noteListAdapter = NotesListAdapter(arrayListOf(),this)
     private lateinit var viewModel : ListViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -77,8 +77,7 @@ class ListFragment : Fragment() {
         val action = ListFragmentDirections.actionListFragmentToNoteFragment(id)
         binding?.rvList?.let { Navigation.findNavController(it).navigate(action) }
     }
-
-    companion object {
-        private const val TAG = "ListFragment"
+    override fun onClick(id: Long) {
+        goToNoteDetail(id)
     }
 }
