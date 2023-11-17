@@ -5,6 +5,7 @@ import com.azrinurvani.core.repository.NoteRepository
 import com.azrinurvani.core.usecase.AddNote
 import com.azrinurvani.core.usecase.GetAllNotes
 import com.azrinurvani.core.usecase.GetNote
+import com.azrinurvani.core.usecase.GetWordCount
 import com.azrinurvani.core.usecase.RemoveNote
 import dagger.Module
 import dagger.Provides
@@ -18,6 +19,7 @@ class UseCasesModule {
         AddNote(repository),
         GetAllNotes(repository),
         GetNote(repository),
-        RemoveNote(repository)
+        RemoveNote(repository),
+        GetWordCount(),
     )
 }

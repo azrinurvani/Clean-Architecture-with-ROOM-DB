@@ -48,6 +48,7 @@ class NotesListAdapter(var notes : ArrayList<Note>,val actions: ListAction) : Re
                 this.noteLayout.setOnClickListener {
                     actions.onClick(id = note.id)
                 }
+                wordCount.text = "Words : ${note.wordCount}"
             }
         }
     }
